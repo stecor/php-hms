@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/master.css">
   </head>
-  <body>
+  <body class="principal">
     <div class="container">
       <div class="card">
         <img src="images/hmsdoctor.jpg" class="card-img-top" alt="">
@@ -21,7 +21,7 @@
               <label for="password">Password :</label>
               <input type="password" name="password" class="form-control" placeholder="enter password"><br>
               <input type="submit" name="login_submit" id="btnsubmit" class="btn btn-primary">
-          
+
           </form>
         </div>
       </div>

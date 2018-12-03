@@ -1,14 +1,25 @@
-body{
+.principal{
   background-image:url("../images/it-health.jpg");
   background-repeat: no-repeat;
-
 }
 
-.container{
+.principal .container{
   width:400px;
   margin-top: 100px;
 }
 
+.admin{
+  background: url('../images/it-health.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+
 #btnsubmit:hover{
   cursor: pointer;
+}
+
+.admin-head{
+  background-color: #007BFF;
+  color:#fff;
 }
