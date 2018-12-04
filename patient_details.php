@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/css/master.css">
   </head>
   <body>
-
     <div class="jumbotron admin"></div>
     <div class="container">
       <div class="card">
@@ -18,14 +17,14 @@
               <h4>Patient Details</h4>
             </div>
             <div class="col-md-8">
-              <form class="form-group" action="func.php" method="post">
+              <form class="form-group"  method="post">
                 <div class="row">
                   <div class="col-sm-4"></div>
                   <div class="col-sm-6">
                     <input type="text" name="search" class="form-control"  placeholder="Search">
                   </div>
                   <div class="col-sm-2">
-                    <input type="submit" name="patient_search" class="btn btn-light" value="Search">
+                    <input type="submit" name="patient_search_submit" class="btn btn-light" value="Search">
                   </div>
                 </div>
               </form>
@@ -41,15 +40,29 @@
               <th scope="col">Email</th>
               <th scope="col">Contact</th>
               <th scope="col">Appointment</th>
+              <th scope="col">Edit/Delete</th>
             </tr>
           </thead>
           <tbody>
-            <?php get_patient_details(); ?>
+            <?php
+                if (isset($_POST['patient_search_submit'])){
+                  search_patient_details();
+                }else if (isset($_POST['delete-patient'])){
+                  delete_patient($_POST['id']);
+                }else{
+                  get_patient_details();
+                }
+            ?>
           </tbody>
         </table>
       </div>
       <div class="card-body"></div>
-      <div><a href="admin-panel.php" class="btn btn-primary btn-sm">Go Back</a></div><br>
+      <div class="row">
+        <div class="col-md-1"><a href="admin-panel.php" class="btn btn-primary btn-sm">Go Back</a></div>
+        <div class="col-md-1"><a href="patient_details.php" class="btn btn-primary btn-sm">Refresh</a></div>
+        <div class="col-md-10"></div>
+        <br>
+      </div>
     </div>
   </div>
 

@@ -1,12 +1,25 @@
 <?php
+
+// connection with mysql
 $con=mysqli_connect("localhost","root","root","hmsdb");
 
 /* check connection */
 if (mysqli_connect_errno()) {
+
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
 
+function close_connection(){
+  /* close result set */
+  mysqli_free_result($result);
+  /* close connection */
+  mysqli_close($con);
+}
+
+
+
+// login
 if(isset($_POST['login_submit'])){
   $username= $_POST['username'];
   $password= $_POST['password'];
@@ -24,12 +37,10 @@ if(isset($_POST['login_submit'])){
         echo "<script>window.open('index.php','_self')</script>";
       }
   }
-  /* close result set */
-  mysqli_free_result($result);
-  /* close connection */
-  mysqli_close($con);
+  close_connection();
 }
 
+// Insert patient details
 if (isset($_POST['patient_submit'])){
 
   $fname= $_POST['fname'];
@@ -45,20 +56,11 @@ if (isset($_POST['patient_submit'])){
     echo "<script>alert('Appointment Registered');</script>";
     echo "<script>window.open('admin-panel.php','_self')</script>";
   }
-
- /* close result set */
- mysqli_free_result($result);
- /* close connection */
- mysqli_close($con);
-
+ close_connection();
 }
 
-function get_patient_details(){
-  global $con;
-  $query = "SELECT * FROM doctorapp";
-  $result=mysqli_query($con,$query);
-
-
+// function make html table with mysql
+function get_table($result){
   $i = 0;
 
   while($row = mysqli_fetch_array($result)){
@@ -79,10 +81,70 @@ function get_patient_details(){
           <td>$email</td>
           <td>$contact</td>
           <td>$docapp</td>
+          <td>
+              <form class='form-group' method='post'>
+                <div class='row'>
+                  <div class='btn-edit'><input type='submit' name='edit-patient' class='btn btn-light btn-sm' value='Edit'></div>
+                  <div class='btn-delete'><input type='submit'  name='delete-patient' class='btn btn-light btn-sm' value='Delete'></div>
+                  <input type='hidden' name='id' value='$email'/>
+                </div>
+              </form>
+          </td>
           </tr>";
-  }
-  /* close result set */
-  mysqli_free_result($result);
-  /* close connection */
-  mysqli_close($con);
+        }
+}
+
+
+//function get patients list
+function get_patient_details(){
+  global $con;
+  $query = "SELECT * FROM doctorapp";
+  $result=mysqli_query($con,$query);
+
+  get_table($result);
+
+  close_connection();
+}
+
+
+// function search patient
+function search_patient_details(){
+  global $con;
+   $search = $_POST['search'];
+
+  $query = "SELECT * FROM doctorapp WHERE fname='$search' OR lname='$search' OR email='$email' OR contact='$contact' OR docapp='$search'";
+  $result=mysqli_query($con,$query);
+
+  get_table($result);
+
+  close_connection();
+}
+
+// function delete patient
+function delete_patient($id){
+  global $con;
+
+  $query = "DELETE FROM doctorapp WHERE email='$id'";
+
+  $result=mysqli_query($con,$query);
+
+  if ($result) {
+    echo "<script>alert('Record deleted successfully');</script>";
+} else {
+    echo "<script>alert('Error deleting record: $id');</script>";
+}
+
+  get_patient_details();
+
+  close_connection();
+}
+
+// function edit patient details
+function edit_patient($id){
+  global $con;
+
+  $query = "SELECT * FROM doctorapp WHERE email='$id'";
+
+  $result=mysqli_query($con,$query);
+
 }
