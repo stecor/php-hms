@@ -50,10 +50,39 @@ if (isset($_POST['patient_submit'])){
  mysqli_free_result($result);
  /* close connection */
  mysqli_close($con);
+
 }
 
+function get_patient_details(){
+  global $con;
+  $query = "SELECT * FROM doctorapp";
+  $result=mysqli_query($con,$query);
 
 
+  $i = 0;
+
+  while($row = mysqli_fetch_array($result)){
+
+    $i += 1;
+
+    $fname= $row['fname'];
+    $lname= $row['lname'];
+    $email= $row['email'];
+    $contact= $row['contact'];
+    $docapp= $row['docapp'];
 
 
-?>
+    echo "<tr>
+          <td>$i</td>
+          <td>$fname</td>
+          <td>$lname</td>
+          <td>$email</td>
+          <td>$contact</td>
+          <td>$docapp</td>
+          </tr>";
+  }
+  /* close result set */
+  mysqli_free_result($result);
+  /* close connection */
+  mysqli_close($con);
+}
