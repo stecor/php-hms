@@ -82,13 +82,22 @@ function get_table($result){
           <td>$contact</td>
           <td>$docapp</td>
           <td>
-              <form class='form-group' method='post'>
-                <div class='row'>
-                  <div class='btn-edit'><input type='submit' name='edit-patient' class='btn btn-light btn-sm' value='Edit'></div>
-                  <div class='btn-delete'><input type='submit'  name='delete-patient' class='btn btn-light btn-sm' value='Delete'></div>
-                  <input type='hidden' name='id' value='$email'/>
-                </div>
+            <div class='row'>
+             <div class='btn-edit'>
+              <form  name='edit-pat' action='admin-panel.php'  method='post'>
+                  <input type='submit' name='edit-patient' class='btn btn-light btn-sm' value='Edit'>
+                  <input type='hidden' name='fname' value='$fname'/>
+                  <input type='hidden' name='lname' value='$lname'/>
+                  <input type='hidden' name='email' value='$email'/>
+                  <input type='hidden' name='contact' value='$contact'/>
+                  <input type='hidden' name='docapp' value='$docapp'/>
               </form>
+              </div>
+              <form   method='post'>
+                  <input type='submit'  name='delete-patient' class='btn btn-light btn-sm' value='Delete'>
+                  <input type='hidden' name='id' value='$email'/>
+              </form>
+              </div>
           </td>
           </tr>";
         }
@@ -137,14 +146,4 @@ function delete_patient($id){
   get_patient_details();
 
   close_connection();
-}
-
-// function edit patient details
-function edit_patient($id){
-  global $con;
-
-  $query = "SELECT * FROM doctorapp WHERE email='$id'";
-
-  $result=mysqli_query($con,$query);
-
 }

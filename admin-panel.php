@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php include("func.php"); ?>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -30,22 +32,25 @@
               <div class="card-body admin-head">
                 Book Appointment
               </div>
+
               <div class="card-body">
                 <form class="form-group" action="func.php" method="post">
                   <label for="fname">First Name :</label>
-                  <input type="text" name="fname" class="form-control"><br>
+                  <input type="text" name="fname" class="form-control" value="<?php  echo $_POST['fname'];  ?>" ><br>
                   <label for="lname">Last Name :</label>
-                  <input type="text" name="lname" class="form-control"><br>
+                  <input type="text" name="lname" class="form-control" value="<?php  echo $_POST['lname'];  ?>" ><br>
                   <label for="email">Email :</label>
-                  <input type="text" name="email" class="form-control"><br>
+                  <input type="text" name="email" class="form-control" value="<?php  echo $_POST['email']; ?>" ><br>
                   <label for="contact">Contact :</label>
-                  <input type="text" name="contact" class="form-control"><br>
+                  <input type="text" name="contact" class="form-control" value="<?php  echo $_POST['contact']; ?>" ><br>
                   <label for="docapp">Doctor Appointment :</label>
                   <select class="form-control" name="docapp">
+                    <option value="<?php if(isset($_POST['edit-patient'])){ echo $_POST['docapp']; } else { Null;} ?>"><?php if(isset($_POST['edit-patient'])){ echo $_POST['docapp']; } else { Null;} ?></option>
                     <option value="Dr. Frank from 6pm to 8pm">Dr. Frank from 6pm to 8pm</option>
                     <option value="Dr. Carol from 4pm to 6pm">Dr. Carol from 4pm to 6pm</option>
                   </select><br>
                   <input type="submit" name="patient_submit" value="Enter Appointment" class="btn btn-primary">
+                  <input type="submit" name="patient_submit" value="Update Appointment" class="btn btn-primary">
                 </form>
               </div>
             </div>
