@@ -35,6 +35,8 @@
 
               <div class="card-body">
                 <form class="form-group" action="func.php" method="post">
+                  <label for="fname">ID :</label>
+                  <input type="text" name="fname" class="form-control" value="<?php  echo $_POST['id'];  ?>"  readonly><br>
                   <label for="fname">First Name :</label>
                   <input type="text" name="fname" class="form-control" value="<?php  echo $_POST['fname'];  ?>" ><br>
                   <label for="lname">Last Name :</label>
@@ -50,7 +52,7 @@
                     <option value="Dr. Carol from 4pm to 6pm">Dr. Carol from 4pm to 6pm</option>
                   </select><br>
                   <input type="submit" name="patient_submit" value="Enter Appointment" class="btn btn-primary">
-                  <input type="submit" name="patient_submit" value="Update Appointment" class="btn btn-primary">
+                  <input type="submit" name="update_patient" value="Update Appointment" class="btn btn-primary">
                 </form>
               </div>
             </div>

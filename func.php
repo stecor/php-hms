@@ -59,14 +59,32 @@ if (isset($_POST['patient_submit'])){
  close_connection();
 }
 
+
+// Update patient details
+if (isset($_POST['update_patient'])){
+
+  $fname= $_POST['fname'];
+  $lname= $_POST['lname'];
+  $email= $_POST['email'];
+  $contact= $_POST['contact'];
+  $docapp= $_POST['docapp'];
+
+  $query="UPDATE doctorapp SET (fname,lname,email,contact,docapp)VALUES('$fname','$lname','$email','$contact','$docapp')";
+  $result=mysqli_query($con,$query);
+
+  if($result){
+    echo "<script>alert('Appointment Registered');</script>";
+    echo "<script>window.open('admin-panel.php','_self')</script>";
+  }
+ close_connection();
+}
+
 // function make html table with mysql
 function get_table($result){
-  $i = 0;
 
   while($row = mysqli_fetch_array($result)){
 
-    $i += 1;
-
+    $id = $row['id'];
     $fname= $row['fname'];
     $lname= $row['lname'];
     $email= $row['email'];
@@ -75,7 +93,7 @@ function get_table($result){
 
 
     echo "<tr>
-          <td>$i</td>
+          <td>$id</td>
           <td>$fname</td>
           <td>$lname</td>
           <td>$email</td>
@@ -86,6 +104,7 @@ function get_table($result){
              <div class='btn-edit'>
               <form  name='edit-pat' action='admin-panel.php'  method='post'>
                   <input type='submit' name='edit-patient' class='btn btn-light btn-sm' value='Edit'>
+                  <input type='hidden' name='id' value='$id'/>
                   <input type='hidden' name='fname' value='$fname'/>
                   <input type='hidden' name='lname' value='$lname'/>
                   <input type='hidden' name='email' value='$email'/>
@@ -95,7 +114,7 @@ function get_table($result){
               </div>
               <form   method='post'>
                   <input type='submit'  name='delete-patient' class='btn btn-light btn-sm' value='Delete'>
-                  <input type='hidden' name='id' value='$email'/>
+                  <input type='hidden' name='id' value='$id'/>
               </form>
               </div>
           </td>
@@ -121,7 +140,7 @@ function search_patient_details(){
   global $con;
    $search = $_POST['search'];
 
-  $query = "SELECT * FROM doctorapp WHERE fname='$search' OR lname='$search' OR email='$email' OR contact='$contact' OR docapp='$search'";
+  $query = "SELECT * FROM doctorapp WHERE fname='$search' OR lname='$search' OR email='$search' OR contact='$search' OR docapp='$search'";
   $result=mysqli_query($con,$query);
 
   get_table($result);
