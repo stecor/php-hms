@@ -35,8 +35,8 @@
 
               <div class="card-body">
                 <form class="form-group" action="func.php" method="post">
-                  <label for="fname">ID :</label>
-                  <input type="text" name="fname" class="form-control" value="<?php  echo $_POST['id'];  ?>"  readonly><br>
+                  <label for="id">ID :</label>
+                  <input type="text" name="id" class="form-control" value="<?php  echo $_POST['id'];  ?>" readonly ><br>
                   <label for="fname">First Name :</label>
                   <input type="text" name="fname" class="form-control" value="<?php  echo $_POST['fname'];  ?>" ><br>
                   <label for="lname">Last Name :</label>

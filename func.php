@@ -40,6 +40,7 @@ if(isset($_POST['login_submit'])){
   close_connection();
 }
 
+
 // Insert patient details
 if (isset($_POST['patient_submit'])){
 
@@ -62,19 +63,26 @@ if (isset($_POST['patient_submit'])){
 
 // Update patient details
 if (isset($_POST['update_patient'])){
+  global $con;
 
+  $id = $_POST['id'];
   $fname= $_POST['fname'];
   $lname= $_POST['lname'];
   $email= $_POST['email'];
   $contact= $_POST['contact'];
   $docapp= $_POST['docapp'];
 
-  $query="UPDATE doctorapp SET (fname,lname,email,contact,docapp)VALUES('$fname','$lname','$email','$contact','$docapp')";
+
+
+  $query= "UPDATE doctorapp SET fname = '$fname', lname= '$lname', email='$email', contact= '$contact', docapp = '$docapp' WHERE id = '$id'";
+
+
   $result=mysqli_query($con,$query);
 
   if($result){
-    echo "<script>alert('Appointment Registered');</script>";
-    echo "<script>window.open('admin-panel.php','_self')</script>";
+
+    echo "<script>alert('Appointment Updated');</script>";
+    echo "<script>window.open('patient_details.php','_self')</script>";
   }
  close_connection();
 }
