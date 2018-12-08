@@ -51,8 +51,8 @@
                     <option value="Dr. Frank from 6pm to 8pm">Dr. Frank from 6pm to 8pm</option>
                     <option value="Dr. Carol from 4pm to 6pm">Dr. Carol from 4pm to 6pm</option>
                   </select><br>
-                  <input type="submit" name="patient_submit" value="Enter Appointment" class="btn btn-primary">
-                  <input type="submit" name="update_patient" value="Update Appointment" class="btn btn-primary">
+                  <input type="submit" name="patient_submit" value="Enter Appointment" class="btn btn-primary" <?php if(isset($_POST['edit-patient'])){ echo 'disabled';}else{Null;}  ?> >
+                  <input type="submit" name="update_patient" value="Update Appointment" class="btn btn-primary" <?php if(!isset($_POST['edit-patient'])){ echo 'disabled';}else{Null;} ?> >
                 </form>
               </div>
             </div>

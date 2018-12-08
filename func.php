@@ -111,17 +111,19 @@ function get_table($result){
             <div class='row'>
              <div class='btn-edit'>
               <form  name='edit-pat' action='admin-panel.php'  method='post'>
-                  <input type='submit' name='edit-patient' class='btn btn-light btn-sm' value='Edit'>
+                <div class='input-container'>
+                  <button type='submit' name='edit-patient' class='btn btn-light btn-sm' value='Edit'><i class='fas fa-edit icon'></i></button>
                   <input type='hidden' name='id' value='$id'/>
                   <input type='hidden' name='fname' value='$fname'/>
                   <input type='hidden' name='lname' value='$lname'/>
                   <input type='hidden' name='email' value='$email'/>
                   <input type='hidden' name='contact' value='$contact'/>
                   <input type='hidden' name='docapp' value='$docapp'/>
+                </div>
               </form>
               </div>
               <form   method='post'>
-                  <input type='submit'  name='delete-patient' class='btn btn-light btn-sm' value='Delete'>
+                  <button type='submit'  name='delete-patient' class='btn btn-light btn-sm' value='Delete'><i class='fas fa-trash-alt'></i></button>
                   <input type='hidden' name='id' value='$id'/>
               </form>
               </div>
@@ -148,7 +150,7 @@ function search_patient_details(){
   global $con;
    $search = $_POST['search'];
 
-  $query = "SELECT * FROM doctorapp WHERE fname='$search' OR lname='$search' OR email='$search' OR contact='$search' OR docapp='$search'";
+  $query = "SELECT * FROM doctorapp WHERE fname LIKE '%$search%' OR lname LIKE '%$search%' OR email LIKE '%$search%' OR contact LIKE '%$search%' OR docapp LIKE '%$search%'";
   $result=mysqli_query($con,$query);
 
   get_table($result);
@@ -160,7 +162,7 @@ function search_patient_details(){
 function delete_patient($id){
   global $con;
 
-  $query = "DELETE FROM doctorapp WHERE email='$id'";
+  $query = "DELETE FROM doctorapp WHERE id='$id'";
 
   $result=mysqli_query($con,$query);
 
